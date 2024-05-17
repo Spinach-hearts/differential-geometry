@@ -1,0 +1,464 @@
+\documentclass{article}                     % 文档
+\usepackage{ctex}                           % 写了才能显示中文
+\usepackage{microtype}                      % （英文）排版优化
+% \usepackage[a4paper]{geometry}            % 页面设置，包括页面大小与页边距
+\usepackage{geometry}                       % 库函数，调用\geometry{}的必要库
+\geometry{left=2.2cm,right=1.8cm,top=2.0cm,bottom=2.5cm}% 调整页边距
+\geometry{papersize={18.00cm,23.00cm}}      % 调整页面大小
+% \usepackage{fancyhdr}                     % 页眉页脚
+% \usepackage{pdfpages}                     % 使用pdf作为封面
+
+
+\usepackage{amsthm}                         % 定理、命题、证明、解、例子相关的宏包
+\usepackage{amsmath}                        % AMS 数学公式扩展，罗马数字
+\usepackage{amssymb}                        % 在 amsfonts 基础上将 AMS 扩展符号定义成命令，希腊字母
+\usepackage{amsfonts}                       % AMS 扩展符号的基础字体支持，大写空心粗体字母
+% \usepackage{mathtools}                    % 数学公式扩展宏包，提供了公式编号定制和更多的符号、矩阵等
+% \usepackage{nicematrix}                   % 提供的 NiceArray 等环境
+% \usepackage{siunitx}                      % 国际单位制，例如科学记数法，国际单位
+% \usepackage{newtxmath}                    % 将数学字体设置为罗马形式的衬线体
+\usepackage{bm}                             % 提供将数学符号加粗的命令 \bm
+\numberwithin{equation}{section}            % 公式按章节编号
+
+\usepackage{enumitem}                       % 列表设置，\setlist 进行全局设置。例如默认的列表之间间距太大，使用 \setlist{nosep} 取消额外间距。
+\usepackage{graphicx}                       % 支持插图
+% \usepackage{tabularx}                     % 定宽表格，可申明宽度，也可自动排版
+% \usepackage{threeparttable}               % 表格
+% \usepackage{multirow}                     % \multirow[竖直位置]{合并行数}{列宽}{内容} 命令可以用于合并表格的行。其中，“竖直位置可以设置为 c 中间对齐（默认）、t 顶部对齐或 b 底部对齐；“列宽”可以设置为 * 以自动进行调整。
+% \usepackage{booktabs}                     % 标准三线表定义，分别是 \toprule、\midrule 和 \bottomrule。特别地，使用 \cmidrule 命令可以只绘制部分列的中间横线
+% \usepackage{longtable}                    % 表格特别长时，处理跨页表格
+% \usepackage{subcaption}                   % 图片并排，提供的 \subcaptionbox 命令
+% \usepackage{tikz}                         % 绘制数学图形
+\usepackage{caption}                        % 对图表名称的格式进行设置，\captionsetup{labelsep=space} 将图表编号与名字之间的间隔设置为了空格（其他的类似还有分号、句点等习惯）
+\graphicspath{{./figures/}}                 % 图片存储位置
+\numberwithin{figure}{section}              % 图片按章节编号
+\numberwithin{table}{section}               % 表格按章节编号
+\captionsetup{labelsep=space}
+
+
+\makeatletter                               % 罗马字符\rmnum{数字}大写罗马数字 ： \Rmnum{数字}
+\newcommand{\rmnum}[1]{\romannumeral #1}    % 罗马字符
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother                                % 罗马字符
+
+\newcommand\keywords[1]{\textbf{Keywords}: #1}% 关键字环境
+
+\newtheorem{theorem}{\indent 定理}[section] % 中文定理环境
+\newtheorem{lemma}[theorem]{\indent 引理}   % \indent 为了段前空两格
+\newtheorem{proposition}[theorem]{\indent 命题}
+\newtheorem{corollary}[theorem]{\indent 推论}
+\newtheorem{definition}{\indent 定义}[section]
+\newtheorem{example}{\indent 例}[section]
+\newtheorem{remark}{\indent 注}[section]
+\newenvironment{solution}{\begin{proof}[\indent\bf 解]}{\end{proof}}
+\renewcommand{\proofname}{\indent\bf 证明}
+
+\usepackage[backend=bibtex]{biblatex}       % 参考文献编译文件，没有引用参考文献时调用该宏包
+% \usepackage{gbt7714}                      % China standard style
+% \bibliographystyle{gbt7714-numerical}     % numerical / author-year
+% \setlength{\bibsep}{0.5ex}                % vertical spacing between references
+% \usepackage{notoccite}                    % remove citations in TOC and ensure correct numbering
+
+% \usepackage{listings}                     % 提供了排版关键字高亮的代码环境 lstlisting 以及对版式的自定义。类似宏包有minted
+\usepackage[hidelinks]{hyperref}            % 目录超链接
+% \usepackage[colorlinks=false,pdfborder={0 0 0}]{hyperref}% 超链接，一般放到导言区最后一行
+% \usepackage{cleveref}                     % 用于交叉引用的时候
+
+\title{微分几何}                             % 长度最好不要超过20个字
+\author{xxx}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%主体区
+\begin{document}
+%\begin{titlepage}	                    % 自制封面
+%\includepdf[pages={1}]{cover.pdf}          % 封面位置
+%\end{titlepage}                            % 自制封面
+\maketitle                                  % 本页为标题页
+hello！LaTeX
+
+\newpage                                    % 新一页
+\tableofcontents                            % 目录
+\newpage                                    % 新一页
+
+\section{空间曲线}
+\subsection{对象}
+曲线$C$：$\vec{r}=\vec{r}(s)$，$s$为弧长参数
+
+单位切向量：$\vec{\alpha }(s)=\dot{\vec{r}} (s)$，$\dot{\vec{\alpha }} (s)\bot \vec{\alpha }(s)$；切线：$\vec{\rho }=\vec{r}(s)+\lambda \vec{\alpha }(s)$
+
+主法向量：$\vec{\beta }(s)=\frac{\vec{\alpha }(s)}{|\vec{\alpha }(s)|}=\frac{\ddot{\vec{r}} }{|\ddot{\vec{r}}|}$；主法线：$\vec{\rho }=\vec{r}(s)+\beta  \vec{\alpha }(s)$
+
+副法向量：$\vec{\nu (s)}=\vec{\alpha }(s)\times \vec{\beta }(s)$；副法线：$\vec{\rho }=\vec{r}(s)+\lambda \vec{\nu }(s)$
+
+法平面：$(\vec{\rho }-\vec{r}(s))\vec{\alpha }(s)=0$
+
+从切平面：$(\vec{\rho }-\vec{r}(s))\vec{\beta }(s)=0$
+
+密切平面：$(\vec{\rho }-\vec{r}(s))\vec{\nu }(s)=0$
+
+\subsection{泛函}
+曲率挠率得定义为
+\begin{equation*}
+    \left\{\begin{matrix}
+        \kappa (s)=|\ddot{\vec{r}}(s)|& \mbox{曲率} \\
+        \tau (s)=-\dot{\vec{v}}\cdot\vec{\beta }(s)&\mbox{挠率}  
+    \end{matrix}\right.
+\end{equation*}
+曲率挠率得一般计算方法
+\begin{equation*}
+    \kappa =\frac{|\vec{r}^{\prime}\times \vec{r}^{\prime \prime }|}{|\vec{r}^{\prime}|^{3}}
+\end{equation*}
+\begin{equation*}
+    \tau  =\frac{(\vec{r}^{\prime},\vec{r}^{\prime \prime},\vec{r}^{\prime \prime\prime })}{|\vec{r}\times \vec{r}^{\prime \prime}|^{2}}
+\end{equation*}
+
+\subsection{标架}
+Frent 公式
+\begin{equation*}
+    \begin{pmatrix}
+        \vec{\alpha }\\
+        \vec{\beta }\\
+        \vec{\nu }
+    \end{pmatrix}^{\prime}
+       =
+    \begin{pmatrix}
+         0& \kappa  &0 \\
+         -\kappa & 0 & \tau \\
+         0& -\tau  &0
+    \end{pmatrix}
+    \begin{pmatrix}
+        \vec{\alpha }\\
+        \vec{\beta }\\
+        \vec{\nu }
+    \end{pmatrix}
+       \Longleftrightarrow 
+    \left\{\begin{matrix}
+       \dot{\vec{\alpha}}=\kappa \vec{\beta }  \\
+       \dot{\vec{\beta}}=-\kappa\vec{\alpha}+\tau\vec{nu}\\
+       \dot{\vec{\nu}}=-\tau\vec{\beta}
+    \end{matrix}\right.
+\end{equation*}
+Frent 标架$\{\vec{r}(s);\vec{\alpha }(s),\vec{\beta }(s),\vec{\nu }(s)\}|_{s=s_0}$
+
+\section{空间曲面}
+\subsection{测地曲率}
+Gauss公式、C-M公式（$F=M=0$）
+\begin{equation*}
+    \left\{\begin{matrix}
+        K=\frac{-1}{\sqrt{EG} }\{[\frac{(\sqrt{G})_u }{\sqrt{E}} ]_u+[\frac{(\sqrt{E})_v }{\sqrt{G}} ]_v\} \\
+        L_v=HE_v\\
+        N_u=HG_u
+       \end{matrix}\right.
+\end{equation*}
+其中$K=\frac{LN-M^2}{EG-F^2}, H=\frac{LG-2MF+NE}{2(EG-F^2)} $
+
+
+测地线方程$(F=0)$
+\begin{equation*}
+    \left\{\begin{matrix}
+        \frac{\mathrm{d} \theta }{\mathrm{d} s}=\frac{(\ln {E})_v}{2\sqrt{G} }\cos {\theta }-\frac{(\ln {G})_u}{2\sqrt{E} }\sin {\theta }  \\
+        \frac{\mathrm{d} u }{\mathrm{d} s}=\frac{\cos {\theta }}{\sqrt{E} } \\
+        \frac{\mathrm{d} v }{\mathrm{d} s}=\frac{\sin {\theta }}{\sqrt{G} }
+       \end{matrix}\right.
+\end{equation*}
+其中$\theta$为曲线与$u-$曲线的夹角
+
+联络系数：
+\begin{equation*}
+    \Gamma _{ij}^k=\frac{1}{2}g^{kl}(\frac{\partial g_{il}}{\partial u^j}+\frac{\partial g_{jl}}{\partial u^i}+\frac{\partial g_{ij}}{\partial u^l} ) 
+\end{equation*}
+
+
+
+\section{例题}
+\begin{example}
+    \begin{enumerate}
+        \item 求曲线$C:\left\{\begin{matrix}x^2+y^2+z^2=1\\x^2+y^2=x\end{matrix}\right.$，$z\ge 0$的参数方程。
+        \item 求该曲线在$(0,0,1)$处的曲率，$\kappa $挠率$\tau $，该处的 Frent 标架等。
+        \item 求该曲线在$(0,0,1)$处的的副法线，法平面
+    \end{enumerate}
+    \begin{solution}
+        \begin{enumerate}
+            \item 因为$(x-\frac{1}{2})^2+y^2=(\frac{1}{2})^2$，令$x=\frac{1}{2}+\frac{1}{2}\cos{u},y=\frac{1}{2}\sin{u},z=v$代入球面$x^2+y^2+z^2=1$
+
+            得$v=\sin{\frac{u}{2}}$，所以$\vec{r}(u)=(\frac{1+\cos{u}}{2},\frac{\sin{u}}{2},\sin{\frac{u}{2}})$
+        
+            令$u=2t$，所以$\vec{\tilde{r} }(t)=(\cot^2{t},\sin{t}\cos{t},\sin{t})\Rightarrow (0,0,1)$（其中$t=\frac{\pi}{2}$）
+            
+            \item 点$(0,0,1)$ 处对应$t=\frac{\pi}{2}$ 故
+            $$\vec{r}^{\prime}(t)=(2\cos{t}\cdot (-\sin{t}),\cos^2{t}-\sin^2{t},\cos{t})=\vec{r}^{\prime}(t)=(-\sin{2t},\cos{2t},\cos{t})$$
+            $$\vec{r}^{\prime \prime }(t)=(-2\cos{2t},-2\sin{2t},-\sin{t})$$
+            $$\vec{r}^{\prime \prime\prime }(t)=(4\sin{2t},-4\cos{2t},-\cos{t})$$
+            则
+            $$\vec{r}^{\prime}(\frac{\pi}{2})=(0,-1,0)$$
+            $$\vec{r}^{\prime \prime }(\frac{\pi}{2})=(2,0,-1)$$
+            $$\vec{r}^{\prime \prime\prime }(\frac{\pi}{2})=(0,4,0)$$
+            $$|\vec{r}^{\prime}(\frac{\pi}{2})\times \vec{r}^{\prime \prime }(\frac{\pi}{2})|=\sqrt{5}$$
+            $$|\vec{r}^{\prime}(\frac{\pi}{2})|^{3}=1$$
+            故曲线$C$在 $(0,0,1)$ 处的曲率，挠率为：
+            \begin{equation*}
+                \kappa |_{t=\frac{\pi}{2}} =\frac{|\vec{r}^{\prime}(t)\times \vec{r}^{\prime \prime }(t)|}{|\vec{r}^{\prime}(t)|^{3}}|_{t=\frac{\pi}{2}} =\sqrt{5} 
+            \end{equation*}
+            \begin{equation*}
+                \tau |_{t=\frac{\pi}{2}}  =\frac{(\vec{r}^{\prime}(t),\vec{r}^{\prime \prime}(t),\vec{r}^{\prime \prime\prime }(t))}{|\vec{r}(t)\times \vec{r}^{\prime \prime}(t)|^{2}}|_{t=\frac{\pi}{2}} =\frac{0}{5}=0
+            \end{equation*}
+            $$\vec{\alpha }(\frac{\pi}{2})=\frac{\vec{r}^{\prime}(t)}{|\vec{r}^{\prime}(t)|}|_{t=\frac{\pi}{2}}=(0,-1,0)$$
+            $$\vec{\nu}(\frac{\pi}{2})=\frac{\vec{r}^{\prime}(t)\times \vec{r}^{\prime \prime }(t)}{|\vec{r}^{\prime}(t)\times \vec{r}^{\prime \prime }(t)|}|_{t=\frac{\pi}{2}}=(\frac{1}{\sqrt{5}},0,\frac{2}{\sqrt{5}}) $$
+            $$\vec{\beta }(\frac{\pi}{2})=\vec{\nu}(\frac{\pi}{2})\times \vec{\alpha }(\frac{\pi}{2})=(\frac{2}{\sqrt{5}},0,\frac{-1}{\sqrt{5}})$$
+            故曲线$C$在点$(0,0,1)$处的Frent标架为$(\vec{r}(0),\vec{\alpha }(\frac{\pi}{2}),\vec{\beta }(\frac{\pi}{2}),\vec{\nu}(\frac{\pi}{2}))$，其中$\vec{r}(0)=(0,0,1)$
+
+            \item 过点$(0,0,1)$的副法线：$\vec{\rho }=(0,0,1)+(\frac{1}{\sqrt{5}},0,\frac{2}{\sqrt{5}})\lambda ,\lambda \in \mathbb{R} $
+            
+            即
+            \begin{equation*}
+                \left\{\begin{matrix}
+                    x=\lambda \\
+                    y=0\\
+                    z=1+2\lambda
+                   \end{matrix}\right.
+                =
+                \left\{\begin{matrix}
+                    y=0\\
+                    z=1+2x
+                   \end{matrix}\right.
+                   ,\lambda \in \mathbb{R} 
+            \end{equation*}
+            过点$(0,0,1)$的切线：$\vec{\rho }=(0,0,1)+(0,-1,0)\lambda ,\lambda \in \mathbb{R}$
+
+            过点$(0,0,1)$的法平面：$(\vec{\rho }-(0,0,1))\cdot (0,-1,0)=0 $，不妨设$\vec{\rho}=(x,y,z)$，则法平面化简为$y=0$
+
+            过点$(0,0,1)$的切平面：$(\vec{\rho }-(0,0,1))\cdot (2,0,-1)=0 $
+
+            过点$(0,0,1)$的密切平面：$(\vec{\rho }-(0,0,1))\cdot (1,0,2)=0 $
+        \end{enumerate}
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+\begin{example}
+    \begin{enumerate}
+        \item 求在 $XOY$ 平面中，悬链线 $y = \cosh {z} $绕 $z$ 轴旋转一周后得到的悬链面参数方程 （注: 双曲余弦函数 $\cosh {x}\triangleq\frac{\exp^{x}+\exp^{-x}}{2} $）；
+        \item 求悬链面的第一、二基本形式；
+        \item 求悬链面的主曲率、单位主方向、Gauss曲率、平均曲率；
+        \item 求悬链面上测地线方程（可含积分表达），并写出两条具体不平行的测地线；
+        \item 悬链面与平面能否建立等距变换，为什么？
+    \end{enumerate}
+    \begin{solution}
+        \begin{enumerate}
+            \item $\vec{r}(u,v)=(u,\cosh{u}\cos{v},\cosh{u}\sin{v}),u\in \mathbb{R} ,v\in [0,2\pi)$
+            \item $\Rmnum{1}=\cosh^2{u}(du^2+dv^2)$，$\Rmnum{2}=-du^2+dv^2$
+            \item 令
+            \begin{equation*}
+                \left |  \begin{pmatrix} -1&0 \\ 0&1 \end{pmatrix}-k \begin{pmatrix} \cosh^2u&0 \\ 0&\cosh^2u \end{pmatrix}\right |=0
+            \end{equation*}
+            $k_1=\frac{1}{\cosh^2u},k_2=\frac{1}{\cosh^2u}$，$K=k_1\cdot k_2=\frac{-1}{\cosh^4u}$，$H=\frac{1}{2}(k_1+k_2)=0$
+
+            由
+            \begin{equation*}
+                \begin{pmatrix} -1&0 \\ 0&1\end{pmatrix}\begin{pmatrix}\alpha _i\\ \beta _i \end{pmatrix}=k_i\begin{pmatrix} \cosh^2u&0 \\ 0&\cosh^2u \end{pmatrix}\begin{pmatrix} \alpha _i\\ \beta _i \end{pmatrix},(i=1,2)
+            \end{equation*}
+            得
+            \begin{equation*}
+                \begin{pmatrix}\alpha _1\\ \beta _1\end{pmatrix}=\begin{pmatrix}0\\1\end{pmatrix}
+                \Longrightarrow 
+                \vec{e_1}=\frac{\begin{pmatrix}0\\1\end{pmatrix}}{\left | \begin{pmatrix}0\\1\end{pmatrix} \right | }=\begin{pmatrix}0\\\frac{1}{\cosh{u}}\end{pmatrix}=\frac{\vec{r_v} }{\cosh{u}}=(0,-\sin{v},\cos{v})   
+            \end{equation*}
+            \begin{equation*}
+                \begin{pmatrix}\alpha _2\\ \beta _2\end{pmatrix}=\begin{pmatrix}1\\0\end{pmatrix}
+                \Longrightarrow 
+                \vec{e_2}=\frac{\begin{pmatrix}0\\1\end{pmatrix}}{\left | \begin{pmatrix}0\\1\end{pmatrix} \right | }=\begin{pmatrix}\frac{1}{\cosh{u}}\\0\end{pmatrix}=\frac{\vec{r_u} }{\cosh{u}}=(\frac{1}{\cosh{u}},\tanh{u}\cos{v},\tanh{u}\sin{v})   
+            \end{equation*}
+            $$|\vec{r_v}|^2=\vec{r_v}\cdot \vec{r_v}=G=\cosh^2{u}$$
+            $$\vec{r_v}=(0,\cosh{u(-\sin{v})},\cosh{u(-\cos{v})})$$
+            \item 
+            \item 不能。因为悬链面的Gauss曲率$K<0$，而平面的Gauss曲率$\equiv 0$，由Gauss绝妙定理，不可能建立等距变换
+        \end{enumerate}
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+\begin{example}
+    是否存在光滑曲面， 使得它的第一、二基本形式分别为下面两个二次型
+    $$\Rmnum{1}=(u^2+1)du^2=u^2dv^2,\Rmnum{2}=\frac{du^2+u^2dv^2}{\sqrt{u^2+1}}$$
+    若不存在该曲面， 请说明理由； 若存在， 也请说明理由， 并写出曲面的一个参数方程。
+    \begin{solution}
+        存在。$E=u^2+1,F=0,G=u^2,L=\frac{1}{\sqrt{u^2+1}},M=0,N=\frac{u^2}{\sqrt{u^2+1}}$
+
+        验证Gauss公式
+        $$K=-\frac{1}{\sqrt{EG}}\{(\frac{(\sqrt{G})_u}{\sqrt{E}})_u+(\frac{(\sqrt{E})_v}{\sqrt{G}})_v\}$$
+        其中，$K=\frac{LN-M^2}{EG-F^2}$
+
+        左式：
+        $$K=\frac{LN-M^2}{EG-F^2}=\frac{\frac{u^2}{u^2+1}}{u^2(u^2+1)}$$
+        右式：
+        $$-\frac{1}{\sqrt{EG}}\{(\frac{(\sqrt{G})_u}{\sqrt{E}})_u+(\frac{(\sqrt{E})_v}{\sqrt{G}})_v\}=-\frac{1}{u\sqrt{u^2+1}}(\frac{1}{\sqrt{u^2+1}})_u=\frac{1}{(u^2+1)^2}$$
+        所以Gauss公式成立
+
+        再验证C-M公式
+        $$L_v=HE_v,N_u=HG_u,H=\frac{LG-2MF+NE}{2(EG-F^2)}$$
+        所以C-M公式也成立
+
+        综上，由曲面基本定理，满足需求的曲面存在。
+    \end{solution}
+\end{example}
+
+
+
+
+
+
+
+
+\begin{example}
+    证明光滑曲面 $\vec{r}=\vec{r}(u^1,u^2)$ 满足下面两个恒等式：
+    $$\frac{\partial g^{ij}}{\partial u^k}=-g^{im}g^{jn}\frac{\partial g_{mn}}{\partial u^k} ,i,j,k=1,2 $$
+    $$\frac{\partial g^{ij}}{\partial u^k}=-g^{mi}\Gamma_{mk}^i -g^{mj}\Gamma _{mk}^j,i,j,k=1,2$$
+    $$\frac{\partial \ln{\sqrt{g}}}{\partial u^k}=\sum_{i=1}^{2}\Gamma _{ik}^i=\Gamma _{1k}^1+\Gamma _{2k}^2$$
+    其中：$g=g_{11}g_{22}-g_{12}^2$，$g_{ij}$ 为曲面第一基本量，$g^{ij}$表示$g_{ij}$的逆和矩阵， $\Gamma _{ij}^k$为联络系数，定义见试题公式 （C）。 上述写法采用了Einstein记号。
+    \begin{proof}
+        \begin{enumerate}
+            \item 左式：
+            \begin{equation*}
+                \begin{aligned}
+                    asd
+                \end{aligned}
+            \end{equation*}
+            右式：
+            \begin{equation*}
+                \begin{aligned}
+                    asd
+                \end{aligned}
+            \end{equation*}
+            \item 左式：
+            $$=-g^{im}g^{in}\frac{\partial g_{mn}}{\partial u^{k}}$$
+            右式：
+            \begin{equation*}
+                \begin{aligned}
+                    &=-g^{mj}[\frac{1}{2}g^{il}(\frac{\partial g_{ml}}{\partial u^k}+\frac{\partial g_{kl}}{\partial u^m}-\frac{\partial g_{mk}}{\partial u^l})]-g^{li}[\frac{1}{2}g^{jm}(\frac{\partial g_{ml}}{\partial u^k}+\frac{\partial g_{km}}{\partial u^l}-\frac{\partial g_{lk}}{\partial u^m})]\\
+                    &=-g^{mj}g^{il}\frac{\partial g_{ml}}{\partial u^k}\\
+                    &=-g^{nj}g^{im}\frac{\partial g_{nm}}{\partial u^k}
+                \end{aligned}
+            \end{equation*}
+            由此证明第二个结论成立。
+            \item 左式：
+            \begin{equation*}
+                \begin{aligned}
+                    asd
+                \end{aligned}
+            \end{equation*}
+            右式：
+            \begin{equation*}
+                \begin{aligned}
+                    asd
+                \end{aligned}
+            \end{equation*}
+            由此证明第三个结论成立。
+        \end{enumerate}
+    \end{proof}
+\end{example}
+
+
+
+
+
+
+
+\begin{example}
+    设曲面 $S:\vec{r}=\vec{r}(u,v)$ 存在半测地坐标网， 使得$\Rmnum{1}=du^2+G(u,v)dv^2$，其中：函数$G(0,v)=1,G_u(0,v)=0$。求证：
+    $$G(u,v)=1-K(0,v)u^2+o(u^2)$$
+    其中：函数 $K(0,v)$ 表示曲面 $S$ 在 $(0,v)$ 处的 Gauss 曲率。
+    \begin{proof}
+        在半侧地坐标网下：
+        $$E=1,F=0,G=G(u,v)$$
+        所以
+        \begin{equation*}
+            \begin{aligned}
+                K(u,v)&=\frac{-1}{\sqrt{EG} }\{[\frac{(\sqrt{G})_u }{\sqrt{E}} ]_u+[\frac{(\sqrt{E})_v }{\sqrt{G}} ]_v\}\\
+                &=\frac{-1}{\sqrt{G} }\cdot (\sqrt{G}_{uu})\\
+                &=\frac{-1}{\sqrt{G} }[\frac{1}{2}(-\frac{1}{2})G^{-\frac{3}{2}}G_u^2+\frac{1}{2}G^{-\frac{1}{2}}G_{uu}]\\
+                &=\frac{1}{4}G^{-2}-\frac{1}{2}G^{-1}G_{uu}
+            \end{aligned}
+        \end{equation*}
+        从而$K(0,v)=\frac{1}{4}\frac{G_u(0,v)}{G^2(0,v)}-\frac{1}{2}\frac{G_{uu}(0,v)}{G(0,v)}$
+        \begin{equation*}
+            \begin{aligned}
+                K(0,v)&=\frac{1}{4}\frac{G_u(0,v)}{G^2(0,v)}-\frac{1}{2}\frac{G_{uu}(0,v)}{G(0,v)}\\
+                &=-\frac{1}{2}G_{uu}(0,v)
+            \end{aligned}
+        \end{equation*}
+        由于函数$G(u,v)$光滑，它在$(0,v)$处的Taylor展开式为
+        \begin{equation*}
+            \begin{aligned}
+                G(u,v)&=G(0,v)+G_u(0,v)u+\frac{G_{uu}(0,v)}{2!}u^2+o(u^2)\\
+                &=1+0+\frac{1}{2}(-2)K(0,v)u^2+o(u^2)\\
+                &=1-K(0,v)u^2+o(u^2)
+            \end{aligned}
+        \end{equation*}
+    \end{proof}
+\end{example}
+
+
+
+
+
+\begin{example}
+    设曲面上曲线$L$的切向量与曲面的一个主方向夹角为$\theta$，证明：
+    $$\int_0^{2\pi}k_n(\theta)d\theta=2\pi H$$
+    其中$H$为曲面的平均曲率，$k_n$为曲线$L$的法曲率
+    \begin{proof}
+        由Euler 公式
+        $$k_n(\theta)=k_1\cos^2(\theta)+k_2\sin^2(\theta)$$
+        其中$\theta$为$L$的切向量与$\vec{e_1}$的夹角
+
+        所以
+        \begin{equation*}
+            \begin{aligned}
+                \int_0^{2\pi}k_n(\theta)d\theta &=\int_0^{2\pi}[k_1\cos^2(\theta)+k_2(1-\cos^2)(\theta)]\\
+                &=\int_0^{2\pi}[k_1\frac{1+\cos{2\theta}}{2}+k_2-k_2\cdot \frac{1+\cos{2\theta}}{2}]d\theta\\
+                &=\int_0^{2\pi}k_2d\theta +\frac{k_1-k_2}{2}\int_0^{2\pi}(1+cos{2\theta})d\theta\\
+                &=k_2\cdot 2\pi+\frac{k_1-k_2}{2}[2\pi+\frac{1}{2}\sin{2\theta}|_0^{2\pi}]\\
+                &=2k_2\pi+\pi(k_1-k_2)\\
+                &=2\pi\cdot \frac{k_1+k_2}{2}\\
+                &=2\pi H
+            \end{aligned}
+        \end{equation*}
+    \end{proof}
+\end{example}
+
+
+
+
+
+
+\begin{example}
+    试证曲面$z=xf(\frac{y}{x})$的所有切平面都通过一个定点
+    \begin{proof}
+        取曲面$z=xf(\frac{y}{x})$上任一点$P(x_0,y_0,z_0)$（满足$z_0=x_0f(\frac{y_0}{x_0})$）
+
+        则
+        $$\vec{n_p}=(f(\frac{y_0}{x_0})+x\cdot f^{\prime}(\frac{y_0}{x_0})(-\frac{y_0}{x_0^2}),x_0f^{\prime}(\frac{y_0}{x_0})(\frac{1}{x_0}),-1)$$
+        故过点$P$的切平面
+        $$[f(\frac{y_0}{x_0})-\frac{y_0}{x_0}f^{\prime}(\frac{y_0}{x_0})](x-x_0)+f^{\prime}(\frac{y_0}{x_0})\cdot (y-y_0)-(z-z_0)=0$$
+        整理
+        $$[f\cdot\frac{y_0}{x_0}f^{\prime}]x-x_0f+y_0f^{\prime}+f^{\prime}y-f^{\prime}y_0-z+z_0=0$$
+        即
+        $$[f(\frac{y_0}{x_0})-\frac{y_0}{x_0}f^{\prime}(\frac{y_0}{x_0})]x+f^{\prime}(\frac{y_0}{x_0})y-z=0$$
+        显然所有切平面通过定点$(0,0,0)$
+    \end{proof}
+\end{example}
+
+
+\end{document}
